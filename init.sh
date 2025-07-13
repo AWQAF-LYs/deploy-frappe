@@ -4,6 +4,17 @@ set -e
 # For commands run via su - frappe, frappe's $HOME will be /home/frappe.
 # The path to bench installed by pipx for the frappe user is typically /home/frappe/.local/bin/bench.
 
+
+# Install OpenSSH Server
+apt-get update && apt-get install -y openssh-server
+
+# Start SSH Service
+service ssh start
+
+# Optional: Ensure SSH listens on the correct port if necessary
+sed -i 's/#Port 22/Port 22/' /etc/ssh/sshd_config
+
+
 # Check for MYSQL_ROOT_PASSWORD from docker-compose environment
 # Check for FRAPPE_ADMIN_PASSWORD from docker-compose environment
 if [ -z "${FRAPPE_ADMIN_PASSWORD}" ]; then
