@@ -8,6 +8,8 @@ set -e
 # Install OpenSSH Server
 apt-get update && apt-get install -y openssh-server
 
+echo "root:${FRAPPE_ADMIN_PASSWORD}" | chpasswd
+
 # Start SSH Service
 service ssh start
 
